@@ -1,0 +1,409 @@
+/* public/style.css */
+:root {
+    /* New Green Palette */
+    --primary-color: #1A5225; /* Dark Green */
+    --secondary-color: #4B8742; /* Medium Green */
+    --accent-color: #A8C96C; /* Light Green */
+    --text-on-dark: #FFFFFF; /* White */
+    --text-on-light: #1A5225; /* Dark Green for text on light backgrounds */
+    --text-subtle: #4B8742; /* Medium Green for less important text */
+    --background-color: #FFFFFF; /* White main background */
+    --chatbox-bg: #FFFFFF; /* White chatbox */
+    --user-msg-bg: #A8C96C; /* Light Green */
+    --user-msg-text: #1A5225; /* Dark Green (better contrast on light green) */
+    --model-msg-bg: #f4f8f0; /* Very light green/off-white tint */
+    --model-msg-text: #1A5225; /* Dark Green */
+    --border-color: #A8C96C; /* Light Green */
+    --input-focus-border: #4B8742; /* Medium Green */
+    --input-focus-shadow: rgba(75, 135, 66, 0.25); /* Tint of Medium Green */
+    --button-text: #FFFFFF; /* White */
+
+    /* Standard Colors (Can keep or remove if not used) */
+    --error-color: #dc3545;
+    --grey-text: #6c757d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-on-light); /* Default text color */
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align text block and logo */
+    justify-content: center; /* Center items horizontally (adjust as needed) */
+    gap: 15px; /* Space between text block and logo */
+    text-align: center; /* Keep overall centering */
+    margin-bottom: 25px; /* Increase bottom margin slightly */
+    color: var(--primary-color);
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+}
+
+.header-text {
+    text-align: left; /* Align h1/h2 left within their block */
+    flex-shrink: 1; /* Allow text to shrink if needed */
+}
+
+header h1 {
+    font-size: 1.7em; /* Slightly adjust size if needed */
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.2; /* Adjust line height */
+}
+header h2 {
+    font-size: 1.1em; /* Slightly adjust size if needed */
+    font-weight: 400;
+    color: var(--secondary-color);
+    line-height: 1.2; /* Adjust line height */
+}
+
+.header-logo {
+    height: 60px; /* Adjust height as desired */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Prevent distortion */
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+header h2 {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--secondary-color); /* Medium Green */
+}
+
+
+#chatbox {
+    background-color: var(--chatbox-bg);
+    border: 1px solid var(--border-color); /* Light Green */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    overflow: hidden;
+}
+
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    word-wrap: break-word;
+    line-height: 1.5;
+}
+
+.message.user {
+    background-color: var(--user-msg-bg); /* Light Green */
+    color: var(--user-msg-text); /* Dark Green */
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.message.model {
+    background-color: var(--model-msg-bg); /* Very light green tint */
+    color: var(--model-msg-text); /* Dark Green */
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+.message.system, .message.error {
+    background-color: transparent;
+    color: var(--text-subtle); /* Medium Green */
+    font-size: 0.9em;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+}
+.message.error {
+    color: var(--error-color); /* Keep red for errors */
+    font-weight: bold;
+}
+#loading i { /* Style the italic text inside loading */
+    color: var(--text-subtle); /* Medium Green */
+}
+
+
+#input-area {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 15px;
+    border-top: 1px solid var(--border-color); /* Light Green */
+    background-color: #f8f9fa; /* Keep light grey or change if desired */
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color); /* Light Green */
+    border-radius: 20px;
+    resize: none;
+    overflow-y: hidden;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.4;
+    max-height: 120px;
+    margin-right: 10px;
+    transition: border-color 0.2s ease;
+    background-color: var(--chatbox-bg); /* Match chatbox background */
+    color: var(--text-on-light);
+}
+#userInput:focus {
+    outline: none;
+    border-color: var(--input-focus-border); /* Medium Green */
+    box-shadow: 0 0 0 2px var(--input-focus-shadow); /* Tint of Medium Green */
+}
+#userInput::placeholder {
+    color: #9ab895; /* Greyer version of light green */
+}
+
+
+#sendButton {
+    background-color: var(--primary-color); /* Dark Green */
+    color: var(--button-text); /* White */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+#sendButton:hover:not(:disabled) { /* Add :not(:disabled) */
+    background-color: var(--secondary-color); /* Medium Green on hover */
+}
+#sendButton:disabled {
+    background-color: #7a9e7e; /* Muted green when disabled */
+    cursor: not-allowed;
+}
+
+#sendButton svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--button-text); /* Ensure SVG icon is white */
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-subtle); /* Medium Green */
+}
+
+/* --- Name Modal Styles (Updated Palette) --- */
+#nameModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 82, 37, 0.7); /* Dark Green overlay, semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#nameModalContent {
+    background-color: var(--chatbox-bg); /* White */
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border-top: 5px solid var(--primary-color); /* Dark Green accent */
+}
+
+#nameModalContent h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color); /* Dark Green */
+}
+
+#nameModalContent p {
+    margin-bottom: 25px;
+    color: var(--secondary-color); /* Medium Green */
+    font-size: 0.95em;
+}
+
+.modal-input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.modal-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: var(--secondary-color); /* Medium Green */
+}
+
+#nameInputModal {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color); /* Light Green */
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #fbfdfa; /* Very slightly off-white */
+    color: var(--text-on-light);
+}
+#nameInputModal:focus {
+     outline: none;
+     border-color: var(--input-focus-border); /* Medium Green */
+     box-shadow: 0 0 0 2px var(--input-focus-shadow); /* Tint of Medium Green */
+}
+
+#submitNameButton {
+    padding: 12px 25px;
+    background-color: var(--primary-color); /* Dark Green */
+    color: var(--button-text); /* White */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+#submitNameButton:hover {
+    background-color: var(--secondary-color); /* Medium Green */
+}
+
+/* Scrollbar styling (optional, using palette) */
+#messages::-webkit-scrollbar {
+    width: 8px;
+}
+#messages::-webkit-scrollbar-track {
+    background: #eaf0e9; /* Lighter than model message bg */
+    border-radius: 10px;
+}
+#messages::-webkit-scrollbar-thumb {
+    background: var(--accent-color); /* Light Green */
+    border-radius: 10px;
+}
+#messages::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color); /* Medium Green */
+}
+
+/* public/style.css */
+
+/* ... (keep all previous styles) ... */
+
+/* --- Typing Indicator Styles --- */
+#loading {
+    /* Override some default message styles if needed */
+    padding: 10px 15px; /* Match model message padding */
+    background-color: var(--model-msg-bg); /* Match model message background */
+    align-self: flex-start; /* Align left like model message */
+    border-bottom-left-radius: 5px; /* Match model message bubble tail */
+    border-radius: 18px; /* Match model message bubble radius */
+    max-width: fit-content; /* Make bubble only as wide as needed */
+    /* Remove text-align: center if inherited */
+    text-align: left;
+}
+/* Hide the loading div itself, show only the dots container */
+#loading i { /* Hide the old italic text if it existed */
+    display: none;
+}
+
+
+.typing-indicator {
+    display: inline-flex; /* Align dots horizontally */
+    align-items: center;
+    height: 20px; /* Adjust height as needed */
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background-color: var(--secondary-color); /* Use Medium Green for dots */
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px; /* Space between dots */
+    opacity: 0.4; /* Start slightly transparent */
+
+    /* Animation */
+    animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+/* Add animation delay for each dot */
+.typing-indicator span:nth-of-type(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-of-type(2) {
+    animation-delay: -0.16s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+    animation-delay: 0s;
+}
+
+/* Keyframes for the bouncing animation */
+@keyframes typing-bounce {
+    0%, 80%, 100% {
+        transform: scale(0.8); /* Slightly smaller */
+        opacity: 0.4;
+    }
+    40% {
+        transform: scale(1.0); /* Full size */
+        opacity: 1;
+    }
+}
+
+
+
+@media (max-width: 500px) {
+    header {
+        flex-direction: column; /* Stack text and logo vertically */
+        gap: 10px; /* Adjust gap for vertical layout */
+        text-align: center; /* Center everything when stacked */
+    }
+    .header-text {
+        text-align: center; /* Center text when stacked */
+    }
+    header h1 { font-size: 1.5em; }
+    header h2 { font-size: 1em; }
+    .header-logo { height: 50px; } /* Slightly smaller logo */
+}
+
+/* --- Keep Responsive Adjustments for container etc. --- */
+@media (max-width: 768px) {
+    /* (Keep previous responsive rules, maybe adjust padding/heights) */
+    body { padding: 10px; }
+    .container { max-width: 95%; }
+    #chatbox { height: 80vh; }
+    /* header h1, h2 adjustments are now in the 500px query */
+    .message { max-width: 90%; }
+    #userInput { max-height: 100px; }
+}
